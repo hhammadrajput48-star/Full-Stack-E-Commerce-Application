@@ -1,4 +1,4 @@
-// Usage:  npm run seed      (resets the products collection from data/products.json)
+// Usage:  npm run seed      (resets the products collection from data/products.js)
 import mongoose from 'mongoose'
 import { connectDb } from '../db.js'
 import { resetProducts } from './seedProducts.js'

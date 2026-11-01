@@ -22,12 +22,12 @@ export function createApp() {
 
   app.use(helmet())
   app.use(
-    cors({
-      origin(origin, callback) {
-        // No Origin header = curl / server-to-server / same-origin: allow.
-        if (!origin || env.clientOrigins.includes(origin)) return callback(null, true)
-        callback(new HttpError(403, `Origin ${origin} is not allowed by CORS. Add it to CLIENT_URL on the server.`))
-      },
+    cors((req, callback) => {
+      const origin = req.header('Origin')
+      const sameOrigin = origin && origin === `${req.protocol}://${req.get('host')}`
+      // No Origin header = curl / server-to-server. Same origin = site and API share one domain (Vercel).
+      if (!origin || sameOrigin || env.clientOrigins.includes(origin)) return callback(null, { origin: true })
+      callback(new HttpError(403, `Origin ${origin} is not allowed by CORS. Add it to CLIENT_URL on the server.`))
     }),
   )
   app.use(express.json({ limit: '10kb' }))

@@ -12,5 +12,6 @@
   },
   "devDependencies": {
     "concurrently": "^9.0.1"
-  }
+  },
+  "type": "module"
 }

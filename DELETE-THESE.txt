@@ -1,0 +1,3 @@
+Repo se ye 2 files DELETE karni hain (VS Code me right click -> Delete):
+  api/[...path].js
+  server/data/products.json
